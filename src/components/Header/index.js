@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './style.css';
 class Header extends Component {
     constructor(props){
         super(props)
@@ -9,9 +9,9 @@ class Header extends Component {
     }
     render() {
         return (
-            <div>
-                header
-            </div>
+            <header className='header'>
+                我的订单
+            </header>
         );
     }
 }

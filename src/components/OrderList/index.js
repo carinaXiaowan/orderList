@@ -3,21 +3,33 @@ import OrderItem from '../OrderItem';
 class OrderList extends Component {
     constructor(props){
         super(props)
-        this.data = {
-            id: '1',
-            shop: '院落创意菜',
-            picture: 'http://pic.ffpic.com/files/tupian/tupian0277.jpg',
-            product: '百香果',
-            price: '10',
-            isCommented: true
-        }
+        this.state = {
+            data: []
+        };
+        
     }
     render() {
         return (
             <div>
-                <OrderItem data = {this.data} />
+                {
+                    this.state.data.map( (item) => (
+                        <OrderItem key = {item.id} data = {item} />
+                    ))
+                }
             </div>
         );
+    }
+
+    componentDidMount(){
+        fetch('/mock/orders.json')
+        .then(res => {
+            console.info(res)
+            if(res.ok){
+                return res.json() // // 返回一个Promise，返回数据解析成JSON
+            }
+        }).then( data => {
+            this.setState({data}) // // 获取JSON数据
+        })
     }
 }
 
